@@ -7,9 +7,30 @@ namespace TempElementsConsoleApp
     {
         static void Main(string[] args)
         {
-            Program.Zad1CheckUsing();
+            //Program.Zad1CheckUsing();
+            //Program.Zad1CheckWithTryAndCatch();
 
-            Program.Zad1CheckWithTryAndCatch();
+            TestTempTxtFile();
+
+        }
+
+
+        static void TestTempTxtFile()
+        {
+            Program.DisplayBeginTestLine("Zad 2 - TempTxtFile");
+
+            using (TempTxtFile file = new TempTxtFile())
+            {
+                file.Write("Test");
+                file.WriteLine("Test2");
+                Console.WriteLine("Sprawdz czy dane wpisały się do pliku");
+
+                Console.ReadLine();
+
+                Console.WriteLine("W tym momencie plik powinien się usunąć..");
+
+                Program.DisplayEndTestLine(); 
+            }
 
         }
 
