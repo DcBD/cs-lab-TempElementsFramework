@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using TempElementsLib.src.classes;
 
 namespace TempElementsConsoleApp
@@ -11,7 +12,30 @@ namespace TempElementsConsoleApp
             //Program.Zad1CheckWithTryAndCatch();
 
             //TestTempTxtFile();
-            TestTempDir();
+            //TestTempDir();
+
+            TestTempElementsList();
+        }
+
+        public static void TestTempElementsList()
+        {
+            TempElementsList list = new TempElementsList();
+
+            Console.WriteLine("Adding elements: ");
+            TempTxtFile tempTxtFile = list.AddElement<TempTxtFile>();
+            tempTxtFile.AddText("TEST1");
+            tempTxtFile.AddText("TEST12");
+
+            TempTxtFile tempTxtFile2 = list.AddElement<TempTxtFile>();
+            tempTxtFile2.AddText("TEST2");
+
+            Console.WriteLine("Check whether elements were created");
+            Console.ReadLine();
+
+            Console.WriteLine("Check if file was moved");
+            list.MoveElementTo(tempTxtFile, Path.GetTempPath() + "copied.txt");
+            list.Dispose();
+            Console.ReadLine(); 
         }
 
         static void TestTempDir()
@@ -21,7 +45,7 @@ namespace TempElementsConsoleApp
                 Console.WriteLine("Check if directory is created");
                 Console.ReadLine();
 
-                Console.WriteLine("Check if directory was deleted")
+                Console.WriteLine("Check if directory was deleted");
                 dir.Dispose();
             }
             Program.DisplayEndTestLine();

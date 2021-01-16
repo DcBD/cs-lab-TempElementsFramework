@@ -55,6 +55,7 @@ namespace TempElementsLib.src.classes
         private void Flush()
         {
             TextWriter.Flush();
+
         }
     }
 }

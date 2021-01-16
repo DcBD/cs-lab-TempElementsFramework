@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using TempElementsLib.Interfaces;
+using TempElementsLib.src.Interfaces;
 
 namespace TempElementsLib.src.classes
 {
-    public class TempFile : ITempFile
+    public class TempFile : ITempFile, IMovableElement
     {
         public readonly FileStream fileStream;
 
@@ -29,6 +30,7 @@ namespace TempElementsLib.src.classes
 
         }
 
+    
 
         ~TempFile() { Dispose(); }
 
@@ -39,7 +41,7 @@ namespace TempElementsLib.src.classes
             Dispose(true);
 
             GC.SuppressFinalize(this);
-
+       
             IsDestroyed = true;
 
         }
@@ -60,6 +62,12 @@ namespace TempElementsLib.src.classes
             byte[] info = new UTF8Encoding(true).GetBytes(value);
             fileStream.Write(info, 0, info.Length);
             fileStream.Flush();
+        }
+
+        public void MoveTo(string newPath)
+        {
+            this.fileStream.Close();
+            this.fileInfo.MoveTo(newPath);
         }
     }
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using TempElementsLib.Interfaces;
+using TempElementsLib.src.Interfaces;
 
 namespace TempElementsLib.src.classes
 {
-    public class TempDir : ITempDir
+    public class TempDir : ITempDir, IMovableElement
     {
 
         public readonly DirectoryInfo directoryInfo;
@@ -16,8 +17,6 @@ namespace TempElementsLib.src.classes
 
         public bool IsDestroyed { get; protected set; }
 
-
-
         public TempDir() : this(Path.GetTempPath() + Guid.NewGuid().ToString())
         {
 
@@ -25,6 +24,7 @@ namespace TempElementsLib.src.classes
 
         public TempDir(string dirName)
         {
+
             IsDestroyed = false;
 
             directoryInfo = new DirectoryInfo(dirName);
@@ -47,6 +47,7 @@ namespace TempElementsLib.src.classes
         public void Dispose()
         {
 
+      
 
             directoryInfo?.Delete();
 
@@ -56,8 +57,9 @@ namespace TempElementsLib.src.classes
 
         }
 
-
-
-
+        public void MoveTo(string newPath)
+        {
+            directoryInfo.MoveTo(newPath);
+        }
     }
 }
