@@ -10,8 +10,21 @@ namespace TempElementsConsoleApp
             //Program.Zad1CheckUsing();
             //Program.Zad1CheckWithTryAndCatch();
 
-            TestTempTxtFile();
+            //TestTempTxtFile();
+            TestTempDir();
+        }
 
+        static void TestTempDir()
+        {
+            Program.DisplayBeginTestLine("Zad 3 - TempDir");
+            using (TempDir dir = new TempDir()) {
+                Console.WriteLine("Check if directory is created");
+                Console.ReadLine();
+
+                Console.WriteLine("Check if directory was deleted")
+                dir.Dispose();
+            }
+            Program.DisplayEndTestLine();
         }
 
 
